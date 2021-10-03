@@ -17,23 +17,6 @@
 <link rel="stylesheet" href="scss/register.scss">
 </head>
 <body>
-	
-    <header class="site-navbar" role="banner">
-      <div class="site-navbar-top">
-        <div class="container">
-          <div class="row align-items-center">
-
-
-            <div class="col-12 mb-3 mb-md-0 col-md-4 order-1 order-md-2 text-center col-xl-12">
-              <div class="site-logo">
-                <a href="index.html" class="js-logo-clone">Shoppers</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> 
-    </header> 
-<div class="site-section border-bottom">
 <div class="signup__container">
   <div class="container__child signup__thumbnail">
     <div class="thumbnail__logo"> 
@@ -91,7 +74,22 @@
         </div>
         <input type="hidden" name="hidden-mssg" access="false" id="hidden-mssg">
         <div class="formbuilder-button form-group field-submit-btn">
-          <button type="submit" class="btn-info btn" name="submit-btn" access="false" style="info" id="submit-btn">Register&nbsp;</button>
+          <button type="submit" class="btn-info btn" name="submit-btn" access="false" style="info" onClick = "submitInfo()" id="submit-btn">Register&nbsp; </button>
+		 <script>
+			  function submitInfo(){
+				 let name = document.querySelector("#form-name").value;
+			  	 let phone = document.querySelector("#form-phone").value;
+				 let email = document.querySelector("#form-email").value;
+			     let address = document.querySelector("#form-address").value;
+			     let age = document.querySelector("#form-age").value;
+				 let password1 = document.querySelector("#form-pw1").value;
+			     let password2 = document.querySelector("#form-pw2").value;
+				  
+				  var JSONObject = {"name": name, "phone": phone, "email": email, "address": address, "age": age, "password1": password1, "password2": password2}
+				  
+				  console.log(JSONObject)
+			  }
+			</script>
         </div>
       </div>
     </form>
@@ -99,7 +97,6 @@
       <li> <a class="signup__link" href="login.html">I am already a member</a> </li>
     </ul>
   </div>
-</div>
 </div>
 </body>
 </html>
