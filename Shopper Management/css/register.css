@@ -1,11 +1,16 @@
+
+
+// Remy function
+@function remy($value) {
+  @return ($value / 16px) * 1rem;
+}
+
 body {
   font: 100% / 1.414 "Roboto", "Open Sans", arial, sans-serif;
-  background-color: #008DAA; }
-
+  background-color: #008DAA;
+}
 a,
-[type="submit"] {
-  transition: all .25s ease-in; }
-
+[type="submit"] {transition: all .25s ease-in;}
 .signup__container {
   position: absolute;
   top: 50%;
@@ -17,32 +22,33 @@ a,
   overflow: hidden;
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 50rem;
-  height: 30rem;
-  border-radius: 0.1875rem;
-  box-shadow: 0px 0.1875rem 0.4375rem rgba(0, 0, 0, 0.25); }
-
+  justify-content: center; 
+  width: remy(800px);
+  height: remy(480px);
+  border-radius: remy(3px);
+  box-shadow: 0px remy(3px) remy(7px) rgba(0,0,0,.25);
+}
 .signup__overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.25); }
-
+  background-color: rgba(0,0,0,.25);
+}
 .container__child {
   width: 50%;
   height: 100%;
-  color: #fff; }
+  color: #fff;
 
-#reg-head {
-  color: #000101; }
-
-#over-18-label {
-  color: #000000;
-  font-size: 0.1rem; }
-
+}
+#reg-head{
+    color: #000101;
+}
+#over-18-label{
+    color: #000000;
+    font-size: 0.1rem;
+}
 .signup__thumbnail {
   position: relative;
   padding: 2rem;
@@ -52,75 +58,66 @@ a,
   background: url(https://wallpapercave.com/wp/7sp604v.jpg);
   background-repeat: no-repeat;
   background-position: top center;
-  background-size: cover; }
-
+  background-size: cover;
+}
 .thumbnail__logo,
 .thumbnail__content,
 .thumbnail__links {
   position: relative;
-  z-index: 2; }
-
+  z-index: 2;  
+}
 .thumbnail__logo {
-  align-self: flex-start; }
+    align-self: flex-start;
+    
+}
+.logo__shape {fill: #fff;
 
-.logo__shape {
-  fill: #fff;
-  background-size: cover; }
-
+ 
+    background-size: cover;
+}
 .logo__text {
   display: inline-block;
   font-size: .8rem;
   font-weight: 700;
-  vertical-align: bottom; }
-
-.thumbnail__content {
-  align-self: center; }
-
+  vertical-align: bottom;
+}
+.thumbnail__content {align-self: center;}
 h1,
 h2 {
   font-weight: 300;
-  color: white; }
-
-.heading--primary {
-  font-size: 1.999rem; }
-
-.heading--secondary {
-  font-size: 1.414rem; }
-
+  color: rgba(255,255,255,1);
+}
+.heading--primary {font-size: 1.999rem;}
+.heading--secondary {font-size: 1.414rem;}
 .thumbnail__links {
   align-self: flex-end;
-  width: 100%; }
-
+  width: 100%;
+}
 .thumbnail__links a {
   font-size: 1rem;
-  color: #fff; }
-  .thumbnail__links a:focus, .thumbnail__links a:hover {
-    color: rgba(255, 255, 255, 0.5); }
-
+  color: #fff;
+  &:focus,
+  &:hover {color: rgba(255,255,255,.5);}
+}
 .signup__form {
   padding: 2.5rem;
-  background: #fafafa; }
-
+  background: #fafafa;
+}
 label {
   font-size: .85rem;
   text-transform: uppercase;
-  color: #ccc; }
-
+  color: #ccc;
+}
 .form-control {
   background-color: transparent;
   border-top: 0;
   border-right: 0;
   border-left: 0;
-  border-radius: 0; }
-  .form-control:focus {
-    border-color: #111; }
-
-[type="text"] {
-  color: #111; }
-
-[type="password"] {
-  color: #111; }
-
+  border-radius: 0;
+  &:focus {border-color: #111;}
+}
+[type="text"] {color: #111;}
+[type="password"] {color: #111;}
 .btn--form {
   padding: .5rem 2.5rem;
   font-size: .95rem;
@@ -128,14 +125,15 @@ label {
   text-transform: uppercase;
   color: #fff;
   background: #111;
-  border-radius: 2.1875rem; }
-  .btn--form:focus, .btn--form:hover {
-    background: #323232; }
-
+  border-radius: remy(35px);
+  &:focus,
+  &:hover {background: lighten(#111, 13%);}
+}
 .signup__link {
   font-size: .8rem;
   font-weight: 600;
   text-decoration: underline;
-  color: #999; }
-  .signup__link:focus, .signup__link:hover {
-    color: #787878; }
+  color: #999;
+  &:focus,
+  &:hover {color: darken(#999, 13%);}
+}
