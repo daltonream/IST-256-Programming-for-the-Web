@@ -1,0 +1,5 @@
+{"id" : "1223","description" : "White Nike Shoes", "category" :"Footwear","measure" : 5, "price" : 100, "weight" : "2 lbs"}
+{"id" : "321","description" : "Black Nike Shoes", "category" :"Footwear","measure" : 10, "price" : 120, "weight" : "3 lbs"}
+{"id" : "345","description" : "White Nike Shirt", "category" :"Upperwear","measure" : 18, "price" : 30, "weight" : ""}
+{"id" : "5671","description" : "Green Nike Sweatshirt", "category" :"Upperwear","measure" : 5, "price" : 80, "weight" : "2 lbs"}
+{"id" : "891","description" : "Yellow Adidas Socks", "category" :"Footwear","measure" : 20, "price" : 15, "weight" : ".25 lbs"}
