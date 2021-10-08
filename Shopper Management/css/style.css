@@ -4,6 +4,11 @@ body {
   color: #8c92a0;
   font-weight: 300;
   font-size: 16px; }
+#search-bar{
+    align-self: auto;
+    margin-top: 5px;
+    
+}
 
 ::-moz-selection {
   background: #000;

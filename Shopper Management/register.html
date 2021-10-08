@@ -1,0 +1,180 @@
+<!-- Dalton Ream, John Swanson,Jiaxi Xiang   -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Register</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,700">
+<link rel="stylesheet" href="fonts/icomoon/style.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/magnific-popup.css">
+<link rel="stylesheet" href="css/jquery-ui.css">
+<link rel="stylesheet" href="css/owl.carousel.min.css">
+<link rel="stylesheet" href="css/owl.theme.default.min.css">
+<link rel="stylesheet" href="css/aos.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="scss/register.scss">
+<link rel="stylesheet" href="css/register.css">  
+</head>
+ <body>
+<div class="site-wrap">
+  <header class="site-navbar" role="banner">
+    <div class="site-navbar-top">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-6 col-md-4 order-2 order-md-1 site-search-icon text-left">
+            <form action="" class="site-block-top-search">
+              <span class="icon icon-search2"></span>
+              <input type="text" class="form-control border-0" placeholder="Search">
+            </form>
+          </div>
+          <div class="col-12 mb-3 mb-md-0 col-md-4 order-1 order-md-2 text-center">
+            <div class="site-logo"> <a href="index.html" class="js-logo-clone">ShoesRUS</a> </div>
+          </div>
+          <div class="col-6 col-md-4 order-3 order-md-3 text-right">
+            <div class="site-top-icons">
+              <ul>
+                 <li><a href="product-manager.html"><span class="icon icon-create_new_folder"></span></a></li> 
+                <li><a href="account.html"><span class="icon icon-person"></span></a></li>
+                <li><a href="#"><span class="icon icon-heart-o"></span></a></li>
+                <li> 
+                  <!--                    <a href="cart.html" class="site-cart">--> 
+                  <span class="icon icon-shopping_cart"></span> </li>
+                <li class="d-inline-block d-md-none ml-md-0"><a href="#" class="site-menu-toggle js-menu-toggle"><span class="icon-menu"></span></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="site-navigation text-right text-md-center" role="navigation">
+      <div class="container">
+        <ul class="site-menu js-clone-nav d-none d-md-block">
+          <li class="has-children active">
+          <li><a href="contact.html">Home</a></li>
+          <!--
+              <ul class="dropdown">
+                <li><a href="#">Menu One</a></li>
+                <li><a href="#">Menu Two</a></li>
+                <li><a href="#">Menu Three</a></li>
+                <li class="has-children">
+                  <a href="#">Sub Menu</a>
+                  <ul class="dropdown">
+                    <li><a href="#">Menu One</a></li>
+                    <li><a href="#">Menu Two</a></li>
+                    <li><a href="#">Menu Three</a></li>
+                  </ul>
+                </li>
+              </ul>
+-->
+          
+          <li class="has-children"> 
+            <!--              <a href="about.html">About</a>-->
+            <ul class="dropdown">
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Location</a></li>
+            </ul>
+          </li>
+          <!--            <li><a href="shop.html">Shop</a></li>--> 
+          <!--
+            <li><a href="#">Catalogue</a></li>
+            <li><a href="#">New Arrivals</a></li> -->
+          <li><a href="contact.html">Contact</a></li>
+          <li class="has-children"> <a id="menu-account-link" href="account.html">Account</a>
+            <ul class="dropdown">
+              <li><a href="register.html">Register</a></li>
+              <li><a href="#">Settings</a></li>
+              <li><a href="#">Wishlist</a></li>
+              <li><a href="#">Cart</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+<div class="signup__container" style="position: static;">
+  <div class="container__child signup__thumbnail">
+    <div class="thumbnail__logo"> 
+      <h1 class="logo__text">SHOESRUS</h1>
+    </div>
+    <div class="thumbnail__content text-center">
+      <h1 class="heading--primary">Join our shoe crew today!</h1>
+      <h2 class="heading--secondary"><i>selection, style, inventory and class</i> </h2>
+    </div>
+    <div class="thumbnail__links">
+      <ul class="list-inline m-b-0 text-center">
+        <li><a ></a></li>
+        <li><a > </a></li>
+        <li><a </li>
+        <li><a ></a></li>
+      </ul>
+    </div>
+    <div class="signup__overlay"></div>
+  </div>
+  <div class="container__child signup__form">
+    <form id="signup-form" onSubmit="index.html"></-- js method call -->
+      
+      <div class="rendered-form">
+        <div class="">
+          <h1 class="reg-head" id="reg-head">Shopper Registration</h1>
+        </div>
+        <div class="formbuilder-text form-group field-form-name">
+          <label for="form-name" class="formbuilder-text-label">Enter Name<span class="formbuilder-required">*</span></label>
+          <input type="text" placeholder="Enter name" class="form-control" name="form-name" access="false" maxlength="30" id="form-name" required="required" aria-required="true">
+        </div>
+        <div class="formbuilder-text form-group field-form-phone">
+          <label for="form-phone" class="formbuilder-text-label">Mobile Phone<span class="tooltip-element" tooltip="Number won't be shared.">?</span></label>
+          <input type="tel" placeholder="Enter phone number" class="form-control" name="form-phone" access="false" maxlength="10" id="form-phone" title="Number won't be shared.">
+        </div>
+        <div class="formbuilder-textarea form-group field-form-address">
+          <label for="form-address" class="formbuilder-textarea-label">Enter Shipping Address<span class="formbuilder-required">*</span></label>
+          <textarea type="textarea" placeholder="Enter street, city, state, and zip code" class="form-control" name="form-address" access="false" maxlength="89" rows="3" id="form-address" required="required" aria-required="true"></textarea>
+        </div>
+        <div class="formbuilder-number form-group field-form-age">
+          <label for="form-age" class="formbuilder-number-label">Enter Your Age<span class="formbuilder-required">*</span><span class="tooltip-element" tooltip="Must be over 18 to shop with us"></span></label>
+          <input type="number" class="form-control" name="form-age" access="false" min="18" max="115" step="1" id="form-age" title="Must be over 18 to shop with us" required="required" aria-required="true">
+        </div>
+          <p id="over-18-label" style="padding-left: 5px;">Must be over 18 to shop with us!</p>
+        <div class="formbuilder-text form-group field-form-email">
+          <label for="form-email" class="formbuilder-text-label">Email Address<span class="formbuilder-required">*</span></label>
+          <input type="email" placeholder="Enter email address" class="form-control" name="form-email" access="false" maxlength="40" id="form-email" required="required" aria-required="true">
+        </div>
+        <div class="formbuilder-text form-group field-form-pw1">
+          <label for="form-pw1" class="formbuilder-text-label">Enter Password<span class="formbuilder-required">*</span></label>
+          <input type="password" placeholder="Enter password" class="form-control" name="form-pw1" access="false" maxlength="35" id="form-pw1" required="required" aria-required="true">
+        </div>
+        <div class="formbuilder-text form-group field-form-pw2">
+          <label for="form-pw2" class="formbuilder-text-label">Confirm Password<span class="formbuilder-required">*</span></label>
+          <input type="password" placeholder="Confirm password" class="form-control" name="form-pw2" access="false" maxlength="35" id="form-pw2" required="required" aria-required="true">
+        </div>
+        <input type="hidden" name="hidden-mssg" access="false" id="hidden-mssg">
+        <div class="formbuilder-button form-group field-submit-btn">
+          <button type="submit" class="btn btn-sm btn-primary" name="submit-btn" access="false"  onClick = "submitInfo()" >Register&nbsp; </button>
+		 <script>
+			  function submitInfo(){
+				 let name = document.querySelector("#form-name").value;
+			  	 let phone = document.querySelector("#form-phone").value;
+				 let email = document.querySelector("#form-email").value;
+			     let address = document.querySelector("#form-address").value;
+			     let age = document.querySelector("#form-age").value;
+				 let password1 = document.querySelector("#form-pw1").value;
+			     let password2 = document.querySelector("#form-pw2").value;
+				  
+				  var JSONObject = {"name": name, "phone": phone, "email": email, "address": address, "age": age, "password1": password1, "password2": password2}
+				  
+				  console.log(JSONObject)
+			  }
+			</script>
+        </div>
+      </div>
+    </form>
+    <ul>
+      <li> <a class="signup__link" href="login.html">I am already a member</a> </li>
+    </ul>
+  </div>
+</div>
+     </div>
+</body>
+</html>

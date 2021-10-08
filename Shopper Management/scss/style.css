@@ -612,6 +612,20 @@ a {
     .site-block-top-search input:focus, .site-block-top-search input:active {
       padding-left: 25px; }
 
+.site-block-product-search {
+  position: relative; }
+  .site-block-product-search .icon {
+    position: absolute;
+    margin-left: 4px;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%); }
+  .site-block-product-search input {
+    padding-left: 40px;
+    transition: .3s all ease-in-out; }
+    .site-block-product-search input:focus, .site-block-product-search input:active {
+      padding-left: 25px; }
+
 .site-block-27 ul, .site-block-27 ul li {
   padding: 0;
   margin: 0; }
