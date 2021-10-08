@@ -1,5 +1,5 @@
 .site-blocks-cover {
-	background-size: cover;
+	background-size:cover;
 	background-repeat: no-repeat;
 	background-position: center center;
 	&, .row {
@@ -307,7 +307,23 @@
 		}
 	}
 }
-
+.site-block-product-search {
+	position: relative;
+	.icon {
+		position: absolute;
+        margin-left: 4px;
+		left: 0;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+	input {
+		padding-left: 40px;
+		transition: .3s all ease-in-out;
+		&:focus, &:active {
+			padding-left: 25px;
+		}
+	}
+}
 .site-block-27 {
 	ul {
 		&, li {

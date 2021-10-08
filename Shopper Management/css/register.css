@@ -12,7 +12,7 @@ body {
 a,
 [type="submit"] {transition: all .25s ease-in;}
 .signup__container {
-  position: absolute;
+  position:absolute;
   top: 50%;
   right: 0;
   left: 0;
