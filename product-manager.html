@@ -1,0 +1,209 @@
+<!-- Dalton Ream, John Swanson,Jiaxi Xiang   -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Product Manager - SHOESRUS</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,700">
+<link rel="stylesheet" href="fonts/icomoon/style.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/magnific-popup.css">
+<link rel="stylesheet" href="css/jquery-ui.css">
+<link rel="stylesheet" href="css/owl.carousel.min.css">
+<link rel="stylesheet" href="css/owl.theme.default.min.css">
+<link rel="stylesheet" href="css/aos.css">
+<link rel="stylesheet" href="css/style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+<body>
+  
+<script>
+  var jsonProducts = [
+    {"id" : "1223","description" : "White Nike Shoes", "category" :"Footwear","measure" : 5, "price" : 100, "weight" : "2 lbs"},
+    {"id" : "321","description" : "Black Nike Shoes", "category" :"Footwear","measure" : 10, "price" : 120, "weight" : "3 lbs"},
+    {"id" : "345","description" : "White Nike Shirt", "category" :"Upperwear","measure" : 18, "price" : 30, "weight" : ""},
+    {"id" : "5671","description" : "Green Nike Sweatshirt", "category" :"Upperwear","measure" : 5, "price" : 80, "weight" : "2 lbs"},
+    {"id" : "891","description" : "Yellow Adidas Socks", "category" :"Footwear","measure" : 20, "price" : 15, "weight" : ".25 lbs"}
+];
+	
+// products to be displayed on table	
+  var display = "<tr>  <th>id</th>  <th>Description</th> <th>Category</th> <th>Measure</th> <th>Price</th> <th>Weight</th> </tr>";
+	
+ // loops through products in json object	
+  for (var c = 0; c< jsonProducts.length; c++){
+    display += '<tr>'+ '<td>' + jsonProducts[c].id + '</td>' + '<td>' + jsonProducts[c].description + '</td>' + '<td>' + jsonProducts[c].category + '</td>' + '<td>' +  jsonProducts[c].measure + '</td>' + 
+      '<td>' + jsonProducts[c].price + '</td>' + '<td>' + jsonProducts[c].weight + '</td>' + '</tr>'
+  }
+	
+  $(document).ready(function () {
+	  
+    $('#table').append(display);
+    $('#add_product').click(function(){
+
+        // retrieves input from user
+        var id_ = document.getElementById('product_id').value;
+        var description_ = document.getElementById('prod_desc').value;
+        var category_ = document.getElementById('prod_category').value;
+        var measure_ = document.getElementById('prod_measure').value;
+        var price_ = document.getElementById('prod_price').value;
+        var weight_ = document.getElementById('prod_weight').value;
+
+        new_product = '<tr>'+ '<td>' + id_ + '</td>' + '<td>' + description_ + '</td>' + '<td>' + category_ + '</td>' + '<td>' +  measure_ + '</td>' + 
+       '<td>' + price_ + '</td>' + '<td>' + weight_ + '</td>' + '</tr>'
+
+       // displays new product onto the products table
+       $('#table').append(new_product);
+        
+       // add new product to jsonProducts
+       jsonProducts.push({"id" : id_,"description" : description_, "category" :category_,"measure" : measure_, "price" : price_, "weight" : weight_});
+        
+        // displays newly added products to the console
+        console.log(jsonProducts)
+
+        // stops page from refreshing
+        return false;
+
+        });
+  });
+</script>
+   
+<div class="site-wrap">
+  <header class="site-navbar" role="banner">
+    <div class="site-navbar-top">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-6 col-md-4 order-2 order-md-1 site-search-icon text-left">
+            <form action="" class="site-block-top-search">
+              <span class="icon icon-search2"></span>
+              <input id="search-bar" type="text" class="form-control border-0" placeholder="Search">
+            </form>
+          </div>
+          <div class="col-12 mb-3 mb-md-0 col-md-4 order-1 order-md-2 text-center">
+            <div class="site-logo"> <a href="index.html" class="js-logo-clone">SHOESRUS</a> </div>
+          </div>
+          <div class="col-6 col-md-4 order-3 order-md-3 text-right">
+            <div class="site-top-icons">
+              <ul>
+                <li><a href="product-manager.html"><span class="icon icon-create_new_folder"></span></a></li>
+                <li><a href="#"><span class="icon icon-person"></span></a></li>
+                <li><a href="#"><span class="icon icon-heart-o"></span></a></li>
+                <li> 
+                  <!--                    <a href="cart.html" class="site-cart">--> 
+                  <span class="icon icon-shopping_cart"></span> </li>
+                <li class="d-inline-block d-md-none ml-md-0"><a href="#" class="site-menu-toggle js-menu-toggle"><span class="icon-menu"></span></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="site-navigation text-right text-md-center" role="navigation">
+      <div class="container">
+        <ul class="site-menu js-clone-nav d-none d-md-block">
+          <li class="has-children active">
+          <li><a href="contact.html">Home</a></li>
+
+          
+          <li class="has-children"> 
+            <!--              <a href="about.html">About</a>-->
+            <ul class="dropdown">
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Location</a></li>
+            </ul>
+          </li>
+          <!--            <li><a href="shop.html">Shop</a></li>--> 
+          <!--
+            <li><a href="#">Catalogue</a></li>
+            <li><a href="#">New Arrivals</a></li> -->
+          <li><a id="menu-contact-link" href="contact.html">Contact</a></li>
+          <li class="has-children"> <a id="menu-account-link" href="account.html">Account</a>
+            <ul class="dropdown">
+              <li><a href="register.html">Register</a></li>
+              <li><a href="#">Settings</a></li>
+              <li><a href="#">Wishlist</a></li>
+              <li><a href="#">Cart</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <div class="site-blocks-cover" style="background-image: url(shoe-images/Nike-banner.jpg);" data-aos="fade">
+    <div class="container">
+      <div class="row align-items-start align-items-md-center justify-content-end">
+        <div class="col-md-5 text-center text-md-left pt-5 pt-md-0">
+          <h1 class="mb-2" style="color: #F8F9FA;">Manage Products</h1>
+          <div class="intro-text text-center text-md-left">
+            <p class="mb-4" style="color: rgba(166,243,237,0.96);">Add products  and search for products. Employees Only!</p>
+          </div>
+        </div>    
+      </div>
+        <div class="row align-items-start justify-content-end"  style="width: 100%;">
+            <div class="col-sm site-search-icon text-left">
+            <form action="" class="site-block-top-search">
+              <span class="icon icon-search2"></span>
+              <input id="product-search-bar" type="text" class="form-control border-0" placeholder="Search">
+            </form>
+		  </div>
+			<div>
+				<div class="col-xl-12">
+				<table id="table"></table>
+				</div>
+            <div class="container signup__form">
+              <form>
+                <div class="form-group">
+                  <label for="product_id">Product</label> 
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">ID#</div>
+                    </div> 
+                    <input id="product_id" name="product_id" placeholder="Enter id" type="text" class="form-control" required="required">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="prod_desc">Description</label> 
+                  <textarea id="prod_desc" name="prod_desc" cols="40" rows="4" aria-describedby="prod_descHelpBlock" required="required" class="form-control"></textarea> 
+                  <span id="prod_descHelpBlock" class="form-text text-muted">*Shortly describe the product</span>
+                </div>
+                <div class="form-group">
+                  <label for="prod_category">Category</label> 
+                  <input id="prod_category" name="prod_category" placeholder="Enter category" type="text" required="required" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="prod_measure">Size</label> 
+                  <input id="prod_measure" name="prod_measure" placeholder="Enter size" type="text" required="required" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="prod_price">Price</label> 
+                  <input id="prod_price" name="prod_price" placeholder="Enter price" type="text" required="required" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="prod_weight">Weight</label> 
+                  <input id="prod_weight" name="prod_weight" placeholder="Enter weight (lb.oz)" type="text" aria-describedby="prod_weightHelpBlock" class="form-control"> 
+                  <span id="prod_weightHelpBlock" class="form-text text-muted">(Optional)</span>
+                </div> 
+                <div class="form-group">
+                  <button id="add_product" name="submit" type="submit" class="btn btn-primary">ADD PRODUCT</button>
+                </div>
+              </form>
+              </div>
+          </div>
+        </div> 
+    </div>
+  </div>
+    </div>
+  </footer>
+</div>
+<script src="js/jquery-3.3.1.min.js"></script> 
+<script src="js/jquery-ui.js"></script> 
+<script src="js/popper.min.js"></script> 
+<script src="js/bootstrap.min.js"></script> 
+<script src="js/owl.carousel.min.js"></script> 
+<script src="js/jquery.magnific-popup.min.js"></script> 
+<script src="js/aos.js"></script> 
+<script src="js/main.js"></script>
+</body>
+</html>
