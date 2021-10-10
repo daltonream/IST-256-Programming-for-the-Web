@@ -68,6 +68,31 @@
 
         });
   });
+	function getInfo(){
+		console.log(jsonProducts)
+
+		let input = document.getElementById("product-search-bar").value;
+		console.log(input)
+		for(let i = 0; i <jsonProducts.length; i++){
+			if(input === jsonProducts[i].id){
+						var searchDisplay = "<tr>    <th>Id</th>  <th>Description</th> <th>Category</th> <th>Measure</th> <th>Price</th> <th>Weight</th> </tr>";
+
+				var id_ = jsonProducts[i].id
+				var description_ = jsonProducts[i].description;
+				var category_ = jsonProducts[i].category;
+				var measure_ = jsonProducts[i].measure;
+				var price_ = jsonProducts[i].price;
+				var weight_ = jsonProducts[i].weight;
+
+        searchDisplay += '<tr> '+ ' <td>' + id_ + '</td>' + '<td>' + description_ + '</td>' + '<td>' + category_ + '</td>' + '<td>' +  measure_ + '</td>' + 
+      '<td>' + price_ + '</td>' + '<td>' + weight_ + '</td>' + '</tr>'   
+				
+			}
+		}
+		  $('#table1').append(searchDisplay);
+	
+	}
+
 </script>
    
 <div class="site-wrap">
@@ -145,9 +170,12 @@
             <div class="col-sm site-search-icon text-left">
             <form action="" class="site-block-top-search">
               <span class="icon icon-search2"></span>
-              <input id="product-search-bar" type="text" class="form-control border-0" placeholder="Search">
+              <input id="product-search-bar" type="text" onKeyUp="getInfo()" class="form-control border-0" placeholder="Search">
             </form>
 		  </div>
+			<div class="col-xl-12">
+				<table id="table1"></table>
+			</div>
 			<div>
 				<div class="col-xl-12">
 				<table id="table"></table>
