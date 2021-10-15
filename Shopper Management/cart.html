@@ -1,4 +1,51 @@
 <!DOCTYPE html>
+<script>
+  var jsonProducts = [
+    {"id" : "1223","description" : "White Nike Shoes", "category" :"Footwear","measure" : 5, "price" : 100, "weight" : "2 lbs", "img" : "images/nikeShoes.jpeg"},
+    {"id" : "321","description" : "Black Nike Shoes", "category" :"Footwear","measure" : 10, "price" : 120, "weight" : "3 lbs"},
+    {"id" : "345","description" : "White Nike Shirt", "category" :"Upperwear","measure" : 18, "price" : 30, "weight" : ""},
+    {"id" : "5671","description" : "Green Nike Sweatshirt", "category" :"Upperwear","measure" : 5, "price" : 80, "weight" : "2 lbs"},
+    {"id" : "891","description" : "Yellow Adidas Socks", "category" :"Footwear","measure" : 20, "price" : 15, "weight" : ".25 lbs"}
+];
+function getInfo(){
+	let input = document.getElementById("product-search-bar").value;
+		console.log(input)
+	
+	for(let i = 0; i <jsonProducts.length; i++){
+			if(input === jsonProducts[i].description){
+				document.getElementById("table").hidden = false;
+
+				let finalPrice = jsonProducts[i].price * document.getElementById("quantity").value;
+				console.log(finalPrice)
+				document.getElementById("productName").textContent = jsonProducts[i].description;
+				document.getElementById("productPrice").textContent =  "$" +jsonProducts[i].price;
+				document.getElementById("productFinalPrice").textContent = "$" +finalPrice;
+				document.getElementById("subtotal").textContent = "$" +finalPrice;
+				document.getElementById("total").textContent = "$" +finalPrice;
+				document.getElementById("pic").src = jsonProducts[i].img;
+
+			
+			}
+	}
+}
+	function removeAmount(){
+		let finalPrice = document.getElementById("productFinalPrice").textContent.replace("$","")
+		let productPrice = document.getElementById("productPrice").textContent.replace("$","")
+		document.getElementById("productFinalPrice").textContent = "$" + (finalPrice - productPrice);
+		document.getElementById("subtotal").textContent = "$" + (finalPrice - productPrice);
+		document.getElementById("total").textContent = "$" + (finalPrice - productPrice);
+	}
+	
+	function addAmount(){
+		let quantity = parseInt(document.getElementById("quantity").value);
+		let productPrice = document.getElementById("productPrice").textContent.replace("$","");
+		let newPrice = (quantity + 1) * productPrice;
+		document.getElementById("productFinalPrice").textContent = "$" + newPrice;
+		document.getElementById("subtotal").textContent = "$" + newPrice;
+		document.getElementById("total").textContent = "$" + newPrice;
+	}
+
+</script>
 <html lang="en">
   <head>
     <title>Shoppers &mdash; Colorlib e-Commerce Template</title>
@@ -103,7 +150,12 @@
         </div>
       </div>
     </div>
-
+   <div class="col-sm site-search-icon text-left">
+		<form action="" class="site-block-top-search">
+		  <span class="icon icon-search2"></span>
+		  <input id="product-search-bar" type="text" onKeyUp="getInfo()" class="form-control border-0" placeholder="Search">
+		</form>
+  	</div>
     <div class="site-section">
       <div class="container">
         <div class="row mb-5">
@@ -121,51 +173,26 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  <tr id = "table" hidden="true">
                     <td class="product-thumbnail">
-                      <img src="images/cloth_1.jpg" alt="Image" class="img-fluid">
+                      <img  id = "pic" src="" alt="Image" class="img-fluid">
                     </td>
                     <td class="product-name">
-                      <h2 class="h5 text-black">Top Up T-Shirt</h2>
+                      <h2 id = "productName" class="h5 text-black"></h2>
                     </td>
-                    <td>$49.00</td>
+                    <td id = "productPrice"></td>
                     <td>
                       <div class="input-group mb-3" style="max-width: 120px;">
                         <div class="input-group-prepend">
-                          <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
+                          <button onClick = "removeAmount()" class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
                         </div>
-                        <input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                        <input id = "quantity" type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
                         <div class="input-group-append">
-                          <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
+                          <button onClick = "addAmount()" class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
                         </div>
                       </div>
-
                     </td>
-                    <td>$49.00</td>
-                    <td><a href="#" class="btn btn-primary btn-sm">X</a></td>
-                  </tr>
-
-                  <tr>
-                    <td class="product-thumbnail">
-                      <img src="images/cloth_2.jpg" alt="Image" class="img-fluid">
-                    </td>
-                    <td class="product-name">
-                      <h2 class="h5 text-black">Polo Shirt</h2>
-                    </td>
-                    <td>$49.00</td>
-                    <td>
-                      <div class="input-group mb-3" style="max-width: 120px;">
-                        <div class="input-group-prepend">
-                          <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
-                        </div>
-                        <input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
-                        <div class="input-group-append">
-                          <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
-                        </div>
-                      </div>
-
-                    </td>
-                    <td>$49.00</td>
+                    <td id = "productFinalPrice"></td>
                     <td><a href="#" class="btn btn-primary btn-sm">X</a></td>
                   </tr>
                 </tbody>
@@ -210,7 +237,7 @@
                     <span class="text-black">Subtotal</span>
                   </div>
                   <div class="col-md-6 text-right">
-                    <strong class="text-black">$230.00</strong>
+                    <strong id = "subtotal" class="text-black"></strong>
                   </div>
                 </div>
                 <div class="row mb-5">
@@ -218,7 +245,7 @@
                     <span class="text-black">Total</span>
                   </div>
                   <div class="col-md-6 text-right">
-                    <strong class="text-black">$230.00</strong>
+                    <strong id = "total" class="text-black"></strong>
                   </div>
                 </div>
 

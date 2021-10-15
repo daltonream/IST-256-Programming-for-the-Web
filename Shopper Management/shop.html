@@ -1,4 +1,34 @@
 <!DOCTYPE html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+  var jsonProducts = [
+    {"id" : "1223","description" : "White Nike Shoes", "category" :"Footwear","measure" : 5, "price" : 100, "weight" : "2 lbs", "img" : "images/nikeShoes.jpeg"},
+    {"id" : "321","description" : "Black Nike Socks", "category" :"Footwear","measure" : 10, "price" : 120, "weight" : "3 lbs", "img" : "images/blackNikeSocks.jpg"},
+    {"id" : "345","description" : "White Nike Shirt", "category" :"Upperwear","measure" : 18, "price" : 30, "weight" : "", "img" : "images/nikeShirt.jpg"},
+    {"id" : "5671","description" : "Green Nike Sweatshirt", "category" :"Upperwear","measure" : 5, "price" : 80, "weight" : "2 lbs", "img" : "images/greenHoodie.jpg"},
+    {"id" : "891","description" : "Yellow Adidas Socks", "category" :"Footwear","measure" : 20, "price" : 15, "weight" : ".25 lbs","img" : "images/yellowSocks.webp"},
+];
+	 $(document).ready(function () {
+		document.getElementById("shirt1Title").textContent = jsonProducts[0].description
+		document.getElementById("shirt1Price").textContent = "$" + jsonProducts[0].price
+	 	document.getElementById("shirt1img").src =  jsonProducts[0].img
+		document.getElementById("shirt2Title").textContent = jsonProducts[1].description
+		document.getElementById("shirt2Price").textContent = "$" + jsonProducts[1].price
+	 	document.getElementById("shirt2img").src =  jsonProducts[1].img
+		document.getElementById("shirt3Title").textContent = jsonProducts[2].description
+		document.getElementById("shirt3Price").textContent = "$" + jsonProducts[2].price
+	 	document.getElementById("shirt3img").src =  jsonProducts[2].img
+		document.getElementById("shirt4Title").textContent = jsonProducts[3].description
+		document.getElementById("shirt4Price").textContent = "$" + jsonProducts[3].price
+	 	document.getElementById("shirt4img").src =  jsonProducts[3].img
+	 	document.getElementById("shirt5Title").textContent = jsonProducts[4].description
+		document.getElementById("shirt5Price").textContent = "$" + jsonProducts[4].price
+	 	document.getElementById("shirt5img").src =  jsonProducts[4].img
+ 
+	 })
+</script>
+	
 <html lang="en">
   <head>
     <title>Shoppers &mdash; Colorlib e-Commerce Template</title>
@@ -143,36 +173,33 @@
               <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
                 <div class="block-4 text-center border">
                   <figure class="block-4-image">
-                    <a href="shop-single.html"><img src="images/cloth_1.jpg" alt="Image placeholder" class="img-fluid"></a>
+                    <a href="shop-single.html"><img  id = "shirt1img" src=" " alt="Image placeholder" class="img-fluid"></a>
                   </figure>
                   <div class="block-4-text p-4">
-                    <h3><a href="shop-single.html">Tank Top</a></h3>
-                    <p class="mb-0">Finding perfect t-shirt</p>
-                    <p class="text-primary font-weight-bold">$50</p>
+                    <h3 id = "shirt1Title"><a href="shop-single.html">/a></h3>
+                    <p id = "shirt1Price" class="text-primary font-weight-bold"></p>
                   </div>
                 </div>
               </div>
               <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
                 <div class="block-4 text-center border">
                   <figure class="block-4-image">
-                    <a href="shop-single.html"><img src="images/shoe_1.jpg" alt="Image placeholder" class="img-fluid"></a>
+                    <a href="shop-single.html"><img  id = "shirt2img" src=" " alt="Image placeholder" class="img-fluid"></a>
                   </figure>
                   <div class="block-4-text p-4">
-                    <h3><a href="shop-single.html">Corater</a></h3>
-                    <p class="mb-0">Finding perfect products</p>
-                    <p class="text-primary font-weight-bold">$50</p>
+                    <h3 id = "shirt2Title"><a href="shop-single.html"></a></h3>
+                    <p id = "shirt2Price" class="text-primary font-weight-bold"></p>
                   </div>
                 </div>
               </div>
               <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
                 <div class="block-4 text-center border">
                   <figure class="block-4-image">
-                    <a href="shop-single.html"><img src="images/cloth_2.jpg" alt="Image placeholder" class="img-fluid"></a>
+                    <a href="shop-single.html"><img id = "shirt3img" src=" " alt="Image placeholder" class="img-fluid"></a>
                   </figure>
                   <div class="block-4-text p-4">
-                    <h3><a href="shop-single.html">Polo Shirt</a></h3>
-                    <p class="mb-0">Finding perfect products</p>
-                    <p class="text-primary font-weight-bold">$50</p>
+                    <h3 id = "shirt3Title"><a href="shop-single.html"></a></h3>
+                    <p id = "shirt3Price" class="text-primary font-weight-bold"></p>
                   </div>
                 </div>
               </div>
@@ -180,114 +207,28 @@
               <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
                 <div class="block-4 text-center border">
                   <figure class="block-4-image">
-                    <a href="shop-single.html"><img src="images/cloth_3.jpg" alt="Image placeholder" class="img-fluid"></a>
+                    <a href="shop-single.html"><img id = "shirt4img" src=" " alt="Image placeholder" class="img-fluid"></a>
                   </figure>
                   <div class="block-4-text p-4">
-                    <h3><a href="shop-single.html">T-Shirt Mockup</a></h3>
-                    <p class="mb-0">Finding perfect products</p>
-                    <p class="text-primary font-weight-bold">$50</p>
+                    <h3><a href="shop-single.html"></a></h3>
+                    <p id = "shirt4Title"class="mb-0">/p>
+                    <p id = "shirt4Price"class="text-primary font-weight-bold"></p>
                   </div>
                 </div>
               </div>
               <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
                 <div class="block-4 text-center border">
                   <figure class="block-4-image">
-                    <a href="shop-single.html"><img src="images/shoe_1.jpg" alt="Image placeholder" class="img-fluid"></a>
+                    <a href="shop-single.html"><img id = "shirt5img" src=" " alt="Image placeholder" class="img-fluid"></a>
                   </figure>
                   <div class="block-4-text p-4">
-                    <h3><a href="shop-single.html">Corater</a></h3>
-                    <p class="mb-0">Finding perfect products</p>
-                    <p class="text-primary font-weight-bold">$50</p>
+                    <h3 id = "shirt5Title"><a href="shop-single.html"></a></h3>
+                    <p id = "shirt5Price" class="text-primary font-weight-bold"></p>
                   </div>
                 </div>
               </div>
-              <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
-                <div class="block-4 text-center border">
-                  <figure class="block-4-image">
-                    <a href="shop-single.html"><img src="images/cloth_1.jpg" alt="Image placeholder" class="img-fluid"></a>
-                  </figure>
-                  <div class="block-4-text p-4">
-                    <h3><a href="shop-single.html">Tank Top</a></h3>
-                    <p class="mb-0">Finding perfect t-shirt</p>
-                    <p class="text-primary font-weight-bold">$50</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
-                <div class="block-4 text-center border">
-                  <figure class="block-4-image">
-                    <a href="shop-single.html"><img src="images/shoe_1.jpg" alt="Image placeholder" class="img-fluid"></a>
-                  </figure>
-                  <div class="block-4-text p-4">
-                    <h3><a href="shop-single.html">Corater</a></h3>
-                    <p class="mb-0">Finding perfect products</p>
-                    <p class="text-primary font-weight-bold">$50</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
-                <div class="block-4 text-center border">
-                  <figure class="block-4-image">
-                    <a href="shop-single.html"><img src="images/cloth_2.jpg" alt="Image placeholder" class="img-fluid"></a>
-                  </figure>
-                  <div class="block-4-text p-4">
-                    <h3><a href="shop-single.html">Polo Shirt</a></h3>
-                    <p class="mb-0">Finding perfect products</p>
-                    <p class="text-primary font-weight-bold">$50</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
-                <div class="block-4 text-center border">
-                  <figure class="block-4-image">
-                    <a href="shop-single.html"><img src="images/cloth_3.jpg" alt="Image placeholder" class="img-fluid"></a>
-                  </figure>
-                  <div class="block-4-text p-4">
-                    <h3><a href="shop-single.html">T-Shirt Mockup</a></h3>
-                    <p class="mb-0">Finding perfect products</p>
-                    <p class="text-primary font-weight-bold">$50</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
-                <div class="block-4 text-center border">
-                  <figure class="block-4-image">
-                    <a href="shop-single.html"><img src="images/shoe_1.jpg" alt="Image placeholder" class="img-fluid"></a>
-                  </figure>
-                  <div class="block-4-text p-4">
-                    <h3><a href="shop-single.html">Corater</a></h3>
-                    <p class="mb-0">Finding perfect products</p>
-                    <p class="text-primary font-weight-bold">$50</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
-                <div class="block-4 text-center border">
-                  <figure class="block-4-image">
-                    <a href="shop-single.html"><img src="images/cloth_1.jpg" alt="Image placeholder" class="img-fluid"></a>
-                  </figure>
-                  <div class="block-4-text p-4">
-                    <h3><a href="shop-single.html">Tank Top</a></h3>
-                    <p class="mb-0">Finding perfect t-shirt</p>
-                    <p class="text-primary font-weight-bold">$50</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
-                <div class="block-4 text-center border">
-                  <figure class="block-4-image">
-                    <a href="shop-single.html"><img src="images/cloth_2.jpg" alt="Image placeholder" class="img-fluid"></a>
-                  </figure>
-                  <div class="block-4-text p-4">
-                    <h3><a href="shop-single.html">Polo Shirt</a></h3>
-                    <p class="mb-0">Finding perfect products</p>
-                    <p class="text-primary font-weight-bold">$50</p>
-                  </div>
-                </div>
-              </div>
-
+        
+          
 
             </div>
             <div class="row" data-aos="fade-up">
