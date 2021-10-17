@@ -1,51 +1,4 @@
 <!DOCTYPE html>
-<script>
-  var jsonProducts = [
-    {"id" : "1223","description" : "White Nike Shoes", "category" :"Footwear","measure" : 5, "price" : 100, "weight" : "2 lbs", "img" : "images/nikeShoes.jpeg"},
-    {"id" : "321","description" : "Black Nike Socks", "category" :"Footwear","measure" : 10, "price" : 120, "weight" : "3 lbs", "img" : "images/blackNikeSocks.jpg"},
-    {"id" : "345","description" : "White Nike Shirt", "category" :"Upperwear","measure" : 18, "price" : 30, "weight" : "", "img" : "images/nikeShirt.jpg"},
-    {"id" : "5671","description" : "Green Nike Sweatshirt", "category" :"Upperwear","measure" : 5, "price" : 80, "weight" : "2 lbs", "img" : "images/greenHoodie.jpg"},
-    {"id" : "891","description" : "Yellow Adidas Socks", "category" :"Footwear","measure" : 20, "price" : 15, "weight" : ".25 lbs","img" : "images/yellowSocks.webp"},
-];
-function getInfo(){
-	let input = document.getElementById("product-search-bar").value;
-		console.log(input)
-	
-	for(let i = 0; i <jsonProducts.length; i++){
-			if(input === jsonProducts[i].description){
-				document.getElementById("table").hidden = false;
-
-				let finalPrice = jsonProducts[i].price * document.getElementById("quantity").value;
-				console.log(finalPrice)
-				document.getElementById("productName").textContent = jsonProducts[i].description;
-				document.getElementById("productPrice").textContent =  "$" +jsonProducts[i].price;
-				document.getElementById("productFinalPrice").textContent = "$" +finalPrice;
-				document.getElementById("subtotal").textContent = "$" +finalPrice;
-				document.getElementById("total").textContent = "$" +finalPrice;
-				document.getElementById("pic").src = jsonProducts[i].img;
-
-			
-			}
-	}
-}
-	function removeAmount(){
-		let finalPrice = document.getElementById("productFinalPrice").textContent.replace("$","")
-		let productPrice = document.getElementById("productPrice").textContent.replace("$","")
-		document.getElementById("productFinalPrice").textContent = "$" + (finalPrice - productPrice);
-		document.getElementById("subtotal").textContent = "$" + (finalPrice - productPrice);
-		document.getElementById("total").textContent = "$" + (finalPrice - productPrice);
-	}
-	
-	function addAmount(){
-		let quantity = parseInt(document.getElementById("quantity").value);
-		let productPrice = document.getElementById("productPrice").textContent.replace("$","");
-		let newPrice = (quantity + 1) * productPrice;
-		document.getElementById("productFinalPrice").textContent = "$" + newPrice;
-		document.getElementById("subtotal").textContent = "$" + newPrice;
-		document.getElementById("total").textContent = "$" + newPrice;
-	}
-
-</script>
 <html lang="en">
   <head>
     <title>Shoppers &mdash; Colorlib e-Commerce Template</title>
@@ -65,6 +18,73 @@ function getInfo(){
     <link rel="stylesheet" href="css/aos.css">
 
     <link rel="stylesheet" href="css/style.css">
+
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/main.js"></script>
+
+    <script>
+      
+      //Gobal variable for quantity of product
+      let current_quantity = 1;
+
+      function getInfo(jsonProducts){
+      console.log(jsonProducts.length);
+        let input = document.getElementById("product-search-bar").value;
+        
+        for(let i = 0; i <jsonProducts.length; i++){
+            if(input === jsonProducts[i].description){
+              document.getElementById("table").hidden = false;
+      
+              let finalPrice = jsonProducts[i].price * document.getElementById("quantity").value;
+              document.getElementById("productName").textContent = jsonProducts[i].description;
+              document.getElementById("productPrice").textContent =  "$" +jsonProducts[i].price;
+              document.getElementById("productFinalPrice").textContent = "$" +finalPrice;
+              document.getElementById("subtotal").textContent = "$" +finalPrice;
+              document.getElementById("total").textContent = "$" +finalPrice;
+              document.getElementById("pic").src = jsonProducts[i].img;           
+              document.getElementById("quantity").value = current_quantity;
+            }
+        }
+      }
+      
+        //AJAX request to get products.json file
+        $(document).ready(function(){
+           $("#search").click(function(){
+          $.get("products.json", getInfo);
+        });
+        
+        });
+      
+        function removeAmount(){
+          current_quantity --;
+          document.getElementById("quantity").value = current_quantity;
+          let finalPrice = document.getElementById("productFinalPrice").textContent.replace("$","")
+          let productPrice = document.getElementById("productPrice").textContent.replace("$","")
+          document.getElementById("productFinalPrice").textContent = "$" + (finalPrice - productPrice);
+          document.getElementById("subtotal").textContent = "$" + (finalPrice - productPrice);
+          document.getElementById("total").textContent = "$" + (finalPrice - productPrice);
+        }
+        
+        function addAmount(){
+          //let quantity = parseInt(document.getElementById("quantity").value);
+
+          let productPrice = document.getElementById("productPrice").textContent.replace("$","");
+          let newPrice = (current_quantity + 1) * productPrice;
+
+          current_quantity ++;
+          document.getElementById("quantity").value = current_quantity;
+
+          document.getElementById("productFinalPrice").textContent = "$" + newPrice;
+          document.getElementById("subtotal").textContent = "$" + newPrice;
+          document.getElementById("total").textContent = "$" + newPrice;
+        }
+      
+      </script>
     
   </head>
   <body>
@@ -75,11 +95,7 @@ function getInfo(){
         <div class="container">
           <div class="row align-items-center">
 
-            <div class="col-6 col-md-4 order-2 order-md-1 site-search-icon text-left">
-              <form action="" class="site-block-top-search">
-                <span class="icon icon-search2"></span>
-                <input type="text" class="form-control border-0" placeholder="Search">
-              </form>
+            <div class="col-6 col-md-4 order-2 order-md-1">
             </div>
 
             <div class="col-12 mb-3 mb-md-0 col-md-4 order-1 order-md-2 text-center">
@@ -152,8 +168,8 @@ function getInfo(){
     </div>
    <div class="col-sm site-search-icon text-left">
 		<form action="" class="site-block-top-search">
-		  <span class="icon icon-search2"></span>
-		  <input id="product-search-bar" type="text" onKeyUp="getInfo()" class="form-control border-0" placeholder="Search">
+		  <span class="icon icon-search2" id="search"></span>
+		  <input id="product-search-bar" type="text" class="form-control border-0" placeholder="Search">
 		</form>
   	</div>
     <div class="site-section">
@@ -335,16 +351,6 @@ function getInfo(){
       </div>
     </footer>
   </div>
-
-  <script src="js/jquery-3.3.1.min.js"></script>
-  <script src="js/jquery-ui.js"></script>
-  <script src="js/popper.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/owl.carousel.min.js"></script>
-  <script src="js/jquery.magnific-popup.min.js"></script>
-  <script src="js/aos.js"></script>
-
-  <script src="js/main.js"></script>
     
   </body>
 </html>
