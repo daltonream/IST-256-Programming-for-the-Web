@@ -83,7 +83,9 @@
           document.getElementById("subtotal").textContent = "$" + newPrice;
           document.getElementById("total").textContent = "$" + newPrice;
         }
-      
+      function addProductToCart(){
+          $("#product").load("cart/" + $(this).attr("id")+ ".html");   
+    }
       </script>
     
   </head>
