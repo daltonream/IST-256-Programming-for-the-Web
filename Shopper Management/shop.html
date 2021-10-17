@@ -27,6 +27,9 @@
 	 	document.getElementById("shirt5img").src =  jsonProducts[4].img
  
 	 })
+    function addProductToCart(){
+     $("#product").load("cart/" + $(this).attr("id")+ ".html");   
+    }
 </script>
 	
 <html lang="en">
