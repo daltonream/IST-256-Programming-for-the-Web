@@ -1,4 +1,88 @@
 <!DOCTYPE html>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+<script>
+
+$(document).ready(function(){
+let jsonObject = [
+					{"id" : "1223","description" : "White Nike Shoes", "category" :"Footwear","measure" : 5, "price" : 100, "weight" : "2 lbs", "img" : "images/nikeShoes.jpeg"},
+					{"id" : "321","description" : "Black Nike Socks", "category" :"Footwear","measure" : 10, "price" : 120, "weight" : "3 lbs", "img" : "images/blackNikeSocks.jpg"},
+					{"id" : "345","description" : "White Nike Shirt", "category" :"Upperwear","measure" : 18, "price" : 30, "weight" : "", "img" : "images/nikeShirt.jpg"},
+					{"id" : "5671","description" : "Green Nike Sweatshirt", "category" :"Upperwear","measure" : 5, "price" : 80, "weight" : "2 lbs", "img" : "images/greenHoodie.jpg"},
+					{"id" : "891","description" : "Yellow Adidas Socks", "category" :"Footwear","measure" : 20, "price" : 15, "weight" : ".25 lbs","img" : "images/yellowSocks.webp"}
+				]
+	document.getElementById("productDescription").innerHTML = jsonObject[0].description; //pass JsonObject to here
+	document.getElementById("productPrice").innerHTML = `$ ${jsonObject[0].price}.00`
+	document.getElementById("subtotal").innerHTML = `$ ${jsonObject[0].price}.00`
+	document.getElementById("orderTotal").innerHTML = `$ ${jsonObject[0].price}.00`
+
+ });
+function buttonClicked(){
+	let jsonObject = {};
+	let errorArray = [];
+	let country = document.getElementById("c_country").value
+	let firstName = document.getElementById("c_fname").value
+	let lastName = document.getElementById("c_lname").value
+	let companyName = document.getElementById("c_companyname").value
+	let address = document.getElementById("c_address").value
+	let state = document.getElementById("c_state_country").value
+	let zipCode = document.getElementById("c_postal_zip").value
+	let email = document.getElementById("c_email_address").value
+	let phone = document.getElementById("c_phone").value
+	let carrier = document.getElementById("c_carrier").value
+	let trackingNumber = document.getElementById("c_tracking").value
+	let shippingMethod = document.getElementById("c_method").value
+	if (country === "Select a country"){
+		errorArray.push("Country was empty")
+	}
+	if (!firstName){
+		errorArray.push("First Name was empty")
+	}
+	if (!lastName){
+		errorArray.push("Last Name was empty")
+	}
+	if (!address){
+		errorArray.push("Address was empty")
+	}
+	if (!state){
+		errorArray.push("State was empty")
+	}
+	if (!zipCode){
+		errorArray.push("Zip Code was empty")
+	}
+	if (!email){
+		errorArray.push("Email Address was empty")
+	}
+	if (!phone){
+		errorArray.push("Phone Number was empty")
+	}
+	if (!carrier){
+		errorArray.push("Carrier was empty")
+	}
+	if (!trackingNumber){
+		errorArray.push("Tracking Number was empty")
+	}
+	if (shippingMethod === "Select a Shipping Method"){
+		errorArray.push("Shipping Method was empty")
+	}
+	
+	if(errorArray.length > 0){
+		document.getElementById("errorMessage").className ="text-danger";
+		document.getElementById("errorMessage").innerHTML = "Cannot Submit because:" 
+		for (let i = 0; i < errorArray.length; i++){
+			document.getElementById("errorMessage").innerHTML += "<br> - " + errorArray[i];
+		}
+
+	} else{
+		document.getElementById("errorMessage").className ="text-black";
+		document.getElementById("errorMessage").innerHTML = "Order has Been placed"
+		jsonObject = {"country": country, "firstName": firstName, "lastName": lastName, "address": address, "state": state,
+					 "zipCode": zipCode, "email": email, "phone": phone, "carrier": carrier, "trackingNumber": trackingNumber, "shippingMethod": shippingMethod};
+		
+	}	
+	
+}
+</script>
 <html lang="en">
   <head>
     <title>Shoppers &mdash; Colorlib e-Commerce Template</title>
@@ -115,20 +199,16 @@
         </div>
         <div class="row">
           <div class="col-md-6 mb-5 mb-md-0">
-            <h2 class="h3 mb-3 text-black">Billing Details</h2>
+            <h2 class="h3 mb-3 text-black">Shipping Details</h2>
             <div class="p-3 p-lg-5 border">
               <div class="form-group">
                 <label for="c_country" class="text-black">Country <span class="text-danger">*</span></label>
                 <select id="c_country" class="form-control">
-                  <option value="1">Select a country</option>    
-                  <option value="2">bangladesh</option>    
-                  <option value="3">Algeria</option>    
-                  <option value="4">Afghanistan</option>    
-                  <option value="5">Ghana</option>    
-                  <option value="6">Albania</option>    
-                  <option value="7">Bahrain</option>    
-                  <option value="8">Colombia</option>    
-                  <option value="9">Dominican Republic</option>    
+                  <option value="Select a country">Select a country</option>    
+                  <option value="Algeria">Algeria</option>    
+                  <option value="Afghanistan">Afghanistan</option>    
+                  <option value="Albania">Albania</option>    
+                  <option value="United States">United States</option>     
                 </select>
               </div>
               <div class="form-group row">
@@ -137,7 +217,7 @@
                   <input type="text" class="form-control" id="c_fname" name="c_fname">
                 </div>
                 <div class="col-md-6">
-                  <label for="c_lname" class="text-black">Last Name <span class="text-danger">*</span></label>
+                  <label for="c_lname" class="text-black">Last Name <span class="text-danger" required>*</span></label>
                   <input type="text" class="form-control" id="c_lname" name="c_lname">
                 </div>
               </div>
@@ -182,104 +262,31 @@
                 </div>
               </div>
 
-              <div class="form-group">
-                <label for="c_create_account" class="text-black" data-toggle="collapse" href="#create_an_account" role="button" aria-expanded="false" aria-controls="create_an_account"><input type="checkbox" value="1" id="c_create_account"> Create an account?</label>
-                <div class="collapse" id="create_an_account">
-                  <div class="py-2">
-                    <p class="mb-3">Create an account by entering the information below. If you are a returning customer please login at the top of the page.</p>
-                    <div class="form-group">
-                      <label for="c_account_password" class="text-black">Account Password</label>
-                      <input type="email" class="form-control" id="c_account_password" name="c_account_password" placeholder="">
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-
-              <div class="form-group">
-                <label for="c_ship_different_address" class="text-black" data-toggle="collapse" href="#ship_different_address" role="button" aria-expanded="false" aria-controls="ship_different_address"><input type="checkbox" value="1" id="c_ship_different_address"> Ship To A Different Address?</label>
-                <div class="collapse" id="ship_different_address">
-                  <div class="py-2">
-
-                    <div class="form-group">
-                      <label for="c_diff_country" class="text-black">Country <span class="text-danger">*</span></label>
-                      <select id="c_diff_country" class="form-control">
-                        <option value="1">Select a country</option>    
-                        <option value="2">bangladesh</option>    
-                        <option value="3">Algeria</option>    
-                        <option value="4">Afghanistan</option>    
-                        <option value="5">Ghana</option>    
-                        <option value="6">Albania</option>    
-                        <option value="7">Bahrain</option>    
-                        <option value="8">Colombia</option>    
-                        <option value="9">Dominican Republic</option>    
-                      </select>
-                    </div>
-
-
-                    <div class="form-group row">
-                      <div class="col-md-6">
-                        <label for="c_diff_fname" class="text-black">First Name <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="c_diff_fname" name="c_diff_fname">
-                      </div>
-                      <div class="col-md-6">
-                        <label for="c_diff_lname" class="text-black">Last Name <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="c_diff_lname" name="c_diff_lname">
-                      </div>
-                    </div>
-
-                    <div class="form-group row">
-                      <div class="col-md-12">
-                        <label for="c_diff_companyname" class="text-black">Company Name </label>
-                        <input type="text" class="form-control" id="c_diff_companyname" name="c_diff_companyname">
-                      </div>
-                    </div>
-
-                    <div class="form-group row">
-                      <div class="col-md-12">
-                        <label for="c_diff_address" class="text-black">Address <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="c_diff_address" name="c_diff_address" placeholder="Street address">
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Apartment, suite, unit etc. (optional)">
-                    </div>
-
-                    <div class="form-group row">
-                      <div class="col-md-6">
-                        <label for="c_diff_state_country" class="text-black">State / Country <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="c_diff_state_country" name="c_diff_state_country">
-                      </div>
-                      <div class="col-md-6">
-                        <label for="c_diff_postal_zip" class="text-black">Posta / Zip <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="c_diff_postal_zip" name="c_diff_postal_zip">
-                      </div>
-                    </div>
-
-                    <div class="form-group row mb-5">
-                      <div class="col-md-6">
-                        <label for="c_diff_email_address" class="text-black">Email Address <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="c_diff_email_address" name="c_diff_email_address">
-                      </div>
-                      <div class="col-md-6">
-                        <label for="c_diff_phone" class="text-black">Phone <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="c_diff_phone" name="c_diff_phone" placeholder="Phone Number">
-                      </div>
-                    </div>
-
-                  </div>
-
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="c_order_notes" class="text-black">Order Notes</label>
-                <textarea name="c_order_notes" id="c_order_notes" cols="30" rows="5" class="form-control" placeholder="Write your notes here..."></textarea>
-              </div>
-
+      
             </div>
+			  <br></br>
+			  <h2 class="h3 mb-3 text-black">Shipping Company</h2>
+		      <div class="p-3 p-lg-5 border">
+              <div class="form-group">
+				  <label for="c_carrier" class="text-black">Carrier <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="c_carrier" name="c_carrier" placeholder="Carrier">
+				  <label for="c_tracking" class="text-black">Tracking Number <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="c_tracking" name="c_tracking" placeholder="Tracking Number">
+				  <div class="form-group">
+                <label for="c_method" class="text-black">Shipping Method <span class="text-danger">*</span></label>
+                <select id="c_method" class="form-control">
+                  <option value="Select a Shipping Method">Select a Shipping Method</option>    
+                  <option value="Standard: 5-7 days">Standard: 5-7 days </option>    
+                  <option value="Express: 3-5 days">Express: 3-5 days </option>    
+                  <option value="Next Day: 2 days">Next Day: 2 days </option>    
+                  <option value="Same Day: 1 day">Same Day: 1 day</option>       
+                </select>
+              </div>
+				</div>
+			  </div>
           </div>
+			
+			
           <div class="col-md-6">
 
             <div class="row mb-5">
@@ -310,20 +317,17 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td>Top Up T-Shirt <strong class="mx-2">x</strong> 1</td>
-                        <td>$250.00</td>
+                        <td id = "productDescription"> <strong class="mx-2">x</strong> 1</td>
+                        <td id = "productPrice"></td>
                       </tr>
-                      <tr>
-                        <td>Polo Shirt <strong class="mx-2">x</strong>   1</td>
-                        <td>$100.00</td>
-                      </tr>
+                     
                       <tr>
                         <td class="text-black font-weight-bold"><strong>Cart Subtotal</strong></td>
-                        <td class="text-black">$350.00</td>
+                        <td id = "subtotal" class="text-black"></td>
                       </tr>
                       <tr>
                         <td class="text-black font-weight-bold"><strong>Order Total</strong></td>
-                        <td class="text-black font-weight-bold"><strong>$350.00</strong></td>
+                        <td id = "orderTotal" class="text-black font-weight-bold"><strong></strong></td>
                       </tr>
                     </tbody>
                   </table>
@@ -359,7 +363,8 @@
                   </div>
 
                   <div class="form-group">
-                    <button class="btn btn-primary btn-lg py-3 btn-block" onclick="window.location='thankyou.html'">Place Order</button>
+                    <button onClick = "buttonClicked()" class="btn btn-primary btn-lg py-3 btn-block" onclick="window.location='thankyou.html'">Place Order</button>
+					  <p id = "errorMessage" class="text-danger"></p>
                   </div>
 
                 </div>
