@@ -4,17 +4,36 @@
 <script>
 
 $(document).ready(function(){
-let jsonObject = [
-					{"id" : "1223","description" : "White Nike Shoes", "category" :"Footwear","measure" : 5, "price" : 100, "weight" : "2 lbs", "img" : "images/nikeShoes.jpeg"},
-					{"id" : "321","description" : "Black Nike Socks", "category" :"Footwear","measure" : 10, "price" : 120, "weight" : "3 lbs", "img" : "images/blackNikeSocks.jpg"},
-					{"id" : "345","description" : "White Nike Shirt", "category" :"Upperwear","measure" : 18, "price" : 30, "weight" : "", "img" : "images/nikeShirt.jpg"},
-					{"id" : "5671","description" : "Green Nike Sweatshirt", "category" :"Upperwear","measure" : 5, "price" : 80, "weight" : "2 lbs", "img" : "images/greenHoodie.jpg"},
-					{"id" : "891","description" : "Yellow Adidas Socks", "category" :"Footwear","measure" : 20, "price" : 15, "weight" : ".25 lbs","img" : "images/yellowSocks.webp"}
-				]
-	document.getElementById("productDescription").innerHTML = jsonObject[0].description; //pass JsonObject to here
-	document.getElementById("productPrice").innerHTML = `$ ${jsonObject[0].price}.00`
-	document.getElementById("subtotal").innerHTML = `$ ${jsonObject[0].price}.00`
-	document.getElementById("orderTotal").innerHTML = `$ ${jsonObject[0].price}.00`
+
+  var baseurl = "http://localhost:3000/cart";
+
+    $.ajax({
+    url: baseurl,
+    type: 'GET',
+    contentType:'application/json',
+    dataType:'json',
+    success: function(data){
+        //On ajax success, display cartProduct.json data onto the webpage
+        alert(data);
+        document.getElementById("productDescription").innerHTML = data[0].productName; //pass JsonObject to here
+        document.getElementById("productPrice").innerHTML = data[0].price;
+        document.getElementById("quantity").innerHTML = data[0].quantity;
+        console.log(data[0].quantity);
+        document.getElementById("orderTotal").innerHTML = parseInt(data[0].price) * data[0].quantity;
+        },
+    error: function(xhr, ajaxOptions, thrownError) {
+        //On error do this
+            if (xhr.status == 200) {
+
+                alert(ajaxOptions);
+            }
+            else {
+                alert(xhr.status);
+                alert(thrownError);
+            }
+        }
+    });
+
 
  });
 function buttonClicked(){
@@ -313,7 +332,6 @@ function buttonClicked(){
                   <table class="table site-block-order-table mb-5">
                     <thead>
                       <th>Product</th>
-                      <th>Total</th>
                     </thead>
                     <tbody>
                       <tr>
@@ -322,8 +340,8 @@ function buttonClicked(){
                       </tr>
                      
                       <tr>
-                        <td class="text-black font-weight-bold"><strong>Cart Subtotal</strong></td>
-                        <td id = "subtotal" class="text-black"></td>
+                        <td class="text-black font-weight-bold"><strong>Quantity</strong></td>
+                        <td id = "quantity" class="text-black"></td>
                       </tr>
                       <tr>
                         <td class="text-black font-weight-bold"><strong>Order Total</strong></td>
