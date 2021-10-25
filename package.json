@@ -6,9 +6,17 @@
   "scripts": {
     "json:server": "json-server --watch cartProducts.json"
   },
-  "author": "",
+  "author": "jcswanson",
   "license": "ISC",
   "dependencies": {
     "json-server": "^0.17.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jcswanson/alpha-web-storefront.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jcswanson/alpha-web-storefront/issues"
+  },
+  "homepage": "https://github.com/jcswanson/alpha-web-storefront#readme"
 }
