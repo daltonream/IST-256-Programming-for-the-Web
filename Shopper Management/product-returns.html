@@ -5,8 +5,18 @@
 <script src="https://code.angularjs.org/1.6.9/angular.js"></script>
 
 <script>
-  $(document).ready(function () {
+	var jsonProducts = [
+      { "id": "1223", "description": "White Nike Shoes", "category": "Footwear", "measure": 5, "price": 100, "weight": "2 lbs" },
+      { "id": "321", "description": "Black Nike Shoes", "category": "Footwear", "measure": 10, "price": 120, "weight": "3 lbs" },
+      { "id": "345", "description": "White Nike Shirt", "category": "Upperwear", "measure": 18, "price": 30, "weight": "" },
+      { "id": "5671", "description": "Green Nike Sweatshirt", "category": "Upperwear", "measure": 5, "price": 80, "weight": "2 lbs" },
+      { "id": "891", "description": "Yellow Adidas Socks", "category": "Footwear", "measure": 20, "price": 15, "weight": ".25 lbs" }
+    ];
+	
+	var cartProducts = {};
+	
 
+  $(document).ready(function () {
     var baseurl = "http://localhost:3000/cart";
 
     $.ajax({
@@ -15,18 +25,19 @@
       contentType: 'application/json',
       dataType: 'json',
       success: function (data) {
-        //On ajax success, display cartProduct.json data onto the webpage
+        
         alert(data);
-        document.getElementById("productDescription").innerHTML = data[0]
-        .productName; //pass JsonObject to here
+        document.getElementById("productDescription").innerHTML = data[0].productName; 
         document.getElementById("productPrice").innerHTML = data[0].price;
-        document.getElementById("quantity").innerHTML = data[0].quantity;
-        console.log(data[0].quantity);
+        document.getElementById("quantity").innerHTML =  data[0].quantity;
         document.getElementById("orderTotal").innerHTML = parseInt(data[0].price) * data[0].quantity;
+		  
+		  cartProducts = {"description": data[0].productName, "price":data[0].price, "quantity":data[0].quantity, "total": parseInt(data[0].price) * data[0].quantity}
       },
       error: function (xhr, ajaxOptions, thrownError) {
         //On error do this
         if (xhr.status == 200) {
+			
 
           alert(ajaxOptions);
         } else {
@@ -38,9 +49,11 @@
 
 
   });
-  let shippingJsonObject = {};
+	
+		
+  let billingJsonObject = {};
 
-  function buttonClick() {
+  function submitButton() {
 
     let errorArray = [];
     let country = document.getElementById("c_country").value
@@ -52,9 +65,11 @@
     let zipCode = document.getElementById("c_postal_zip").value
     let email = document.getElementById("c_email_address").value
     let phone = document.getElementById("c_phone").value
-    let carrier = document.getElementById("c_carrier").value
-    let trackingNumber = document.getElementById("c_tracking").value
-    let shippingMethod = document.getElementById("c_method").value
+    let cardName = document.getElementById("c_cardName").value
+    let cardNumber = document.getElementById("c_cardNumber").value
+	let expirationDate = document.getElementById("c_expirationDate").value
+	let securityCode = document.getElementById("c_securityCode").value
+
     if (country === "Select a country") {
       errorArray.push("Country was empty")
     }
@@ -79,15 +94,19 @@
     if (!phone) {
       errorArray.push("Phone Number was empty")
     }
-    if (!carrier) {
-      errorArray.push("Carrier was empty")
+	if (!cardName) {
+      errorArray.push("Name on Card was empty")
     }
-    if (!trackingNumber) {
-      errorArray.push("Tracking Number was empty")
+    if (!cardNumber) {
+      errorArray.push("Card Number was empty")
     }
-    if (shippingMethod === "Select a Shipping Method") {
-      errorArray.push("Shipping Method was empty")
+    if (!expirationDate) {
+      errorArray.push("Expiration Date was empty")
     }
+    if (!securityCode) {
+      errorArray.push("Security Code was empty")
+    }
+  
 
     if (errorArray.length > 0) {
       document.getElementById("errorMessage").className = "text-danger";
@@ -98,8 +117,8 @@
 
     } else {
       document.getElementById("errorMessage").className = "text-black";
-      document.getElementById("errorMessage").innerHTML = ""
-      shippingJsonObject = {
+      document.getElementById("errorMessage").innerHTML = "Order has Been placed"
+      billingJsonObject = {
         "country": country,
         "firstName": firstName,
         "lastName": lastName,
@@ -108,16 +127,59 @@
         "zipCode": zipCode,
         "email": email,
         "phone": phone,
-        "carrier": carrier,
-        "trackingNumber": trackingNumber,
-        "shippingMethod": shippingMethod
+        "cardName": cardName,
+        "cardNumber": cardNumber,
+		"expirationDate": expirationDate,
+		"securityCode": securityCode,
+		  
+		  
       };
-		location.href = "product-returns.html";
-
+		console.log(billingJsonObject)
+		
+		location.href = "thankyou.html"
     }
 
   }
-  // AngularJS interaction
+	function searchButton(){ //HERE I USE THE JSONPROUCTS ARRAY SWITCH IT TO CARTPRODUCTS
+		let product = document.getElementById("c_code").value
+		 for (let i = 0; i < jsonProducts.length; i++) {
+        	if (product === jsonProducts[i].id) {
+				document.getElementById("returnButton").hidden = false;
+				var id_ = jsonProducts[i].id
+          		var description_ = jsonProducts[i].description;
+          		var price_ = jsonProducts[i].price;
+				let table = "<tr>     <th>		</th> <th>	Id	</th>  <th>	Description</th> <th>	Price</th> </tr>";
+		
+				table += '<tr>' + '<td>' + '<input type="checkBox" id="return">' + '</td>'  + '<td id = "productID">' + id_ + '</td>' + '<td>' + description_ + '</td>' + '<td>' + price_ + '</td></tr>'
+				document.getElementById("table1").innerHTML = table;
+				break;
+			} else {		
+				document.getElementById("returnButton").hidden = true;
+				document.getElementById("table1").innerHTML = "";
+			}
+		 }
+
+	}
+	
+	function returnButton(){
+		if (document.getElementById("return").checked){
+			let value = document.getElementById("productID").textContent;
+			 for (let i = 0; i < jsonProducts.length; i++) {
+				 if (value === jsonProducts[i].id) {
+					var returnProducts =  { "id": jsonProducts[i].id, "description": jsonProducts[i].description, "category": jsonProducts[i].category, "measure": jsonProducts[i].category,  "price": jsonProducts[i].price, "weight":  jsonProducts[i].weight }
+					document.getElementById("explanation").innerHTML = "Thank you, the return process has started. You should get an email shortly.";
+					document.getElementById("explanation").className = "text-black";
+					document.getElementById("returnButton").hidden = true;
+					document.getElementById("table1").innerHTML = "";
+				 	document.getElementById("c_code").value = "";
+				}
+			 }
+		} else {
+					document.getElementById("explanation").innerHTML = "Please make a Selection";
+					document.getElementById("explanation").className = "text-danger";
+
+		}
+	}
 </script>
 <html>
 
@@ -241,11 +303,11 @@
         </div>
         <div class="row">
           <div class="col-md-6 mb-5 mb-md-0">
-            <h2 class="h3 mb-3 text-black">Shipping Details</h2>
+            <h2 class="h3 mb-3 text-black">Billing Address</h2>
             <div class="p-3 p-lg-5 border">
               <div class="form-group">
                 <label for="c_country" class="text-black">Country <span class="text-danger">*</span></label>
-                <select id="c_country" class="form-control">
+                <select id="c_country" ng-model="country" class="form-control">
                   <option value="Select a country">Select a country</option>
                   <option value="Algeria">Algeria</option>
                   <option value="Afghanistan">Afghanistan</option>
@@ -311,53 +373,61 @@
 
             </div>
             <br></br>
-            <h2 class="h3 mb-3 text-black">Shipping Company</h2>
+            <h2 class="h3 mb-3 text-black">Card Information</h2>
             <div class="p-3 p-lg-5 border">
               <div class="form-group">
-                <label for="c_carrier" class="text-black">Carrier <span class="text-danger">*</span></label>
-                <input type="text" ng-model="carrier" class="form-control" id="c_carrier" name="c_carrier"
-                  placeholder="Carrier">
-                <label for="c_tracking" class="text-black">Tracking Number <span class="text-danger">*</span></label>
-                <input type="text" ng-model="track" class="form-control" id="c_tracking" name="c_tracking"
+                <label for="c_cardName" class="text-black">Name on Card <span class="text-danger">*</span></label>
+                <input type="text" ng-model="cardName" class="form-control" id="c_cardName" name="c_cardName"
+                  placeholder="Name on Card">
+				  <label for="c_cardNumber" class="text-black">Card Number <span class="text-danger">*</span></label>
+				  <input type="text" ng-model="cardNumber" class="form-control" id="c_cardNumber" name="c_cardNumber"
+                  placeholder="Card Number">
+				  
+			   <div class="form-group row">
+                <div class="col-md-6">
+                  	<label for="c_expirationDate" class="text-black">Expiration Date <span class="text-danger">*</span></label>
+					<input type="date" ng-model="expirationDate" class="form-control" id="c_expirationDate" name="c_expirationDate"
                   placeholder="Tracking Number">
-                <div class="form-group">
-                  <label for="c_method" class="text-black">Shipping Method <span class="text-danger">*</span></label>
-                  <select id="c_method" class="form-control">
-                    <option value="Select a Shipping Method">Select a Shipping Method</option>
-                    <option value="Standard: 5-7 days">Standard: 5-7 days </option>
-                    <option value="Express: 3-5 days">Express: 3-5 days </option>
-                    <option value="Next Day: 2 days">Next Day: 2 days </option>
-                    <option value="Same Day: 1 day">Same Day: 1 day</option>
-                  </select>
                 </div>
-
-
+                <div class="col-md-6">
+                 <label for="c_securityCode" class="text-black">Security Code <span class="text-danger">*</span></label>
+                  <input type="text" ng-model="security" class="form-control" id="c_securityCode" name="c_securityCode">
+                </div>
+				   	
+              </div>
+                </div>
               </div>
             </div>
-          </div>
 
 
           <div class="col-md-6">
 
             <div class="row mb-5">
               <div class="col-md-12">
-                <h2 class="h3 mb-3 text-black">Coupon Code</h2>
+                <h2 class="h3 mb-3 text-black">Returns</h2>
                 <div class="p-3 p-lg-5 border">
 
-                  <label for="c_code" class="text-black mb-3">Enter your coupon code if you have one</label>
+                  <label for="c_code" class="text-black mb-3">Enter Product ID to Start return</label>
                   <div class="input-group w-75">
-                    <input type="text" ng-model="coupon" class="form-control" id="c_code" placeholder="Coupon Code"
-                      aria-label="Coupon Code" aria-describedby="button-addon2">
+                    <input type="text" ng-model="coupon" class="form-control" id="c_code" placeholder="Product ID"
+                      aria-label="Product ID" aria-describedby="button-addon2">
                     <div class="input-group-append">
-                      <button class="btn btn-primary btn-sm" type="button" id="button-addon2">Apply</button>
+                      <button onClick = "searchButton()" class="btn btn-primary btn-sm" type="button" id="button-addon2">Search</button>
                     </div>
                   </div>
-
-                </div>
+					<div class="input-group-append">
+						<div>
+							<table id="table1"> </table>
+							<button onClick = "returnButton()" class="btn btn-primary btn-sm" type="button" id="returnButton" hidden = true;>Return</button>
+							<p id = "explanation"> </p>
+						</div>
+					</div>
+				</div>
               </div>
+				
             </div>
-
-            <div class="row mb-5">
+			  
+		  <div class="row mb-5">
               <div class="col-md-12">
                 <h2 class="h3 mb-3 text-black">Your Order</h2>
                 <div class="p-3 p-lg-5 border">
@@ -375,9 +445,10 @@
                         <td class="text-black font-weight-bold"><strong>Quantity</strong></td>
                         <td id="quantity" class="text-black"></td>
                       </tr>
+						
                       <tr>
                         <td class="text-black font-weight-bold"><strong>Order Total</strong></td>
-                        <td id="orderTotal" class="text-black font-weight-bold"><strong></strong></td>
+                        <td id="orderTotal" class="text-black font-weight-bold"> <strong></strong></td>
                       </tr>
                     </tbody>
                   </table>
@@ -421,13 +492,15 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <button class="btn btn-primary btn-lg py-3 btn-block"
-                      onclick="buttonClick()">Continue</button>
+                    <button class="btn btn-primary btn-lg py-3 btn-block" onClick="submitButton()">Place Order</button>
                     <p id="errorMessage" class="text-danger"></p>
                   </div>
                 </div>
               </div>
             </div>
+			  
+
+         
           </div>
           <table class="table site-block-order-table mb-5">
             <thead>
@@ -437,13 +510,19 @@
               <tr>
                 <td class="text-black font-weight-bold">{{fname}} {{lname}} </td>
                 <td class="text-black font-weight-bold">{{email}} {{phone}}</td>
-                <td class="text-black font-weight-bold">{{carrier}}</td>
+                <td class="text-black font-weight-bold">{{country}}</td>
               </tr>
 
               <tr>
                 <td class="text-black font-weight-bold">{{address}} {{state}}</td>
                 <td class="text-black font-weight-bold">{{zip}}</td>
-                <td class="text-black font-weight-bold">{{track}}</td>
+                <td class="text-black font-weight-bold">{{address}}</td>
+              </tr>
+				
+			 <tr>
+                <td class="text-black font-weight-bold">{{cardName}}</td>
+                <td class="text-black font-weight-bold">{{cardNumber}}</td>
+                <td class="text-black font-weight-bold">{{expirationDate}}</td>
               </tr>
             </tbody>
           </table>
