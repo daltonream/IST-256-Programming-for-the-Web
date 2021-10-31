@@ -1,0 +1,65 @@
+{
+  "cart": [
+    {
+      "productName": "White Nike Shoes",
+      "price": 100,
+      "quantity": "3",
+      "img": "images/nikeShoes.jpeg",
+      "id": 1
+    },
+    {
+      "productName": "White Nike Shirt",
+      "price": 30,
+      "quantity": "4",
+      "img": "images/nikeShirt.jpg",
+      "id": 2
+    }
+  ],
+  "products": [
+    {
+      "id": "1223",
+      "description": "White Nike Shoes",
+      "category": "Footwear",
+      "measure": 5,
+      "price": 100,
+      "weight": "2 lbs",
+      "img": "images/nikeShoes.jpeg"
+    },
+    {
+      "id": "321",
+      "description": "Black Nike Socks",
+      "category": "Footwear",
+      "measure": 10,
+      "price": 120,
+      "weight": "3 lbs",
+      "img": "images/blackNikeSocks.jpg"
+    },
+    {
+      "id": "345",
+      "description": "White Nike Shirt",
+      "category": "Upperwear",
+      "measure": 18,
+      "price": 30,
+      "weight": "",
+      "img": "images/nikeShirt.jpg"
+    },
+    {
+      "id": "5671",
+      "description": "Green Nike Sweatshirt",
+      "category": "Upperwear",
+      "measure": 5,
+      "price": 80,
+      "weight": "2 lbs",
+      "img": "images/greenHoodie.jpg"
+    },
+    {
+      "id": "891",
+      "description": "Yellow Adidas Socks",
+      "category": "Footwear",
+      "measure": 20,
+      "price": 15,
+      "weight": ".25 lbs",
+      "img": "images/yellowSocks.webp"
+    }
+  ]
+}

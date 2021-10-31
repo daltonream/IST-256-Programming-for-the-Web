@@ -28,54 +28,84 @@
     <script src="js/main.js"></script>
 
     <script>
-      
-      //Gobal variable for quantity of product
-      let current_quantity = 1;
-      const productName = "";
+        //     function addToCart(jsonProducts){
 
-      function getInfo(jsonProducts){
-        let input = document.getElementById("product-search-bar").value;
-        
-        for(let i = 0; i <jsonProducts.length; i++){
-            if(input === jsonProducts[i].description){
-              document.getElementById("table").hidden = false;
+        // // let input = document.getElementById("product-search-bar").value;
+        // let display = "";
+
+        // for(let i = 0; i <jsonProducts.cart.length; i++){
+
+        //       display += '<tr id="row">' + 
+        //             '<td class="product-thumbnail"> <img  id = "pic" src="' + jsonProducts.cart[i].img + '" alt="Image" class="img-fluid"> </td>' 
+        //             + '<td class="product-name" id ="name">' + jsonProducts.cart[i].productName + '</td>' 
+        //             + '<td id = "productPrice">' + "$" +jsonProducts.cart[i].price + '</td>' 
+        //             + '<td id = "quantity"> <input id = "'+i+'" type="text" class="form-control text-center" value="' + jsonProducts.cart[i].quantity + '" placeholder=""> </td>'
+        //             + '<td id = "productFinalPrice">' + "testing" + '</td>'+ '</tr>';
+
+        //             $('#table').append(display);
+                    
+        //             display = "";
+        //             console.log(document.getElementById(i));
+        //     }
+        // }
       
-              let finalPrice = jsonProducts[i].price * document.getElementById("quantity").value;
-              document.getElementById("productName").textContent = jsonProducts[i].description;
-              document.getElementById("productPrice").textContent =  "$" +jsonProducts[i].price;
-              document.getElementById("productFinalPrice").textContent = "$" +finalPrice;
-              document.getElementById("subtotal").textContent = "$" +finalPrice;
-              document.getElementById("total").textContent = "$" +finalPrice;
-              document.getElementById("pic").src = jsonProducts[i].img;           
-              document.getElementById("quantity").value = current_quantity;
+        let cart =[];
+        let count = 0;
+        function addToTable(jsonProducts){
+          let display = "";
+          
+            let input = document.getElementById("product-search-bar").value;
+
+            for(let i = 0; i <jsonProducts.products.length; i++){             
+
+                if(input === jsonProducts.products[i].description){                 
+                  display += '<tr id="row">' + 
+                    '<td class="product-thumbnail"> <img  id = "pic" src="' + jsonProducts.products[i].img + '" alt="Image" class="img-fluid"> </td>' 
+                    + '<td class="product-name" id ="name">' + jsonProducts.products[i].description + '</td>' 
+                    + '<td id = "productPrice">' + "$" +jsonProducts.products[i].price + '</td>' 
+                    + '<td id = "quantity"> <input id = "'+ count +'" type="text" class="form-control text-center" value="' + 1 + '" placeholder=""> </td>';
+
+                    cart.push({'productName': jsonProducts.products[i].description,'price': jsonProducts.products[i].price, 'quantity':1, 'img':jsonProducts.products[i].img})
+                    
+                    $('#table').append(display);
+                    count++
+                           
             }
+          }
         }
-      }
-      
+
         //AJAX request to get products.json file
         $(document).ready(function(){
-           $("#search").click(function(){
-          console.log("f");
-          $.get("products.json", getInfo);          
-        });
-        
-        //Clicking on checkout will update cartProduct.json file and take user to new page
-        $("#checkout").click(function(){
-            var baseurl = "http://localhost:3000/cart";
+          // $.get("db.json", updateTable); 
 
-            const name = String(document.getElementById("productName").textContent);
-            const price = document.getElementById("productPrice").textContent.replace("$","");
+           $("#search").click(function(){
+            $.get("db.json", addToTable);
             
-            var data = {'productName': name,'price': price, 'quantity':current_quantity};
+          });
+
+          $('#table').delegate('input,select', 'change', function () {
+              let changed_index = $(this).attr('id');
+
+              cart[changed_index].quantity = document.getElementById(changed_index).value; 
+        });
+
+        $("#checkout").click(function(){ 
+          window.location.replace("product-return.html");
+         });
+          //Clicking on checkout will  take user to new page
+         $("#updateCart").click(function(){    
+
+           // for loop helps send cart objects separately
+           for(let i = 0; i <cart.length; i++){
+              var baseurl = "http://localhost:3000/cart";
               $.ajax({
               url: baseurl,
               type: 'POST',
               contentType:'application/json',
-              data: JSON.stringify(data),
+              data: JSON.stringify(cart[i]),
               dataType:'json',
               success: function(data){
-                  //On ajax success do this
-                  alert(data);
+                  
                   },
               error: function(xhr, ajaxOptions, thrownError) {
                   //On error do this
@@ -89,42 +119,13 @@
                       }
                   }
               });
-              window.location.replace("checkout.html");
-           } 
-           
-           )
-
-        
-        });
-      
-        function removeAmount(){
-          current_quantity --;
-          document.getElementById("quantity").value = current_quantity;
-          let finalPrice = document.getElementById("productFinalPrice").textContent.replace("$","")
-          let productPrice = document.getElementById("productPrice").textContent.replace("$","")
-          document.getElementById("productFinalPrice").textContent = "$" + (finalPrice - productPrice);
-          document.getElementById("subtotal").textContent = "$" + (finalPrice - productPrice);
-          document.getElementById("total").textContent = "$" + (finalPrice - productPrice);
-        }
-        
-        function addAmount(){
-
-          
-          let productPrice = document.getElementById("productPrice").textContent.replace("$","");
-          let newPrice = (current_quantity + 1) * productPrice;
-
-          current_quantity ++;
-          document.getElementById("quantity").value = current_quantity;
-
-          document.getElementById("productFinalPrice").textContent = "$" + newPrice;
-          document.getElementById("subtotal").textContent = "$" + newPrice;
-          document.getElementById("total").textContent = "$" + newPrice;
-        }
-      function addProductToCart(){
-          $("#product").load("cart/" + $(this).attr("id")+ ".html");   
-    }
-      </script>
-    
+              
+            }   
+                     
+         });
+         
+          });
+    </script>   
   </head>
   <body>
   
@@ -216,19 +217,17 @@
         <div class="row mb-5">
           <form class="col-md-12" method="post">
             <div class="site-blocks-table">
-              <table class="table table-bordered">
+              <table id = "table" class="table table-bordered">
                 <thead>
                   <tr>
                     <th class="product-thumbnail">Image</th>
                     <th class="product-name">Product</th>
                     <th class="product-price">Price</th>
                     <th class="product-quantity">Quantity</th>
-                    <th class="product-total">Total</th>
-                    <th class="product-remove">Remove</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr id = "table" hidden="true">
+                  <!-- <tr id="row" hidden="true">
                     <td class="product-thumbnail">
                       <img  id = "pic" src="" alt="Image" class="img-fluid">
                     </td>
@@ -249,7 +248,7 @@
                     </td>
                     <td id = "productFinalPrice"></td>
                     <td><a href="#" class="btn btn-primary btn-sm">X</a></td>
-                  </tr>
+                  </tr> -->
                 </tbody>
               </table>
             </div>
@@ -260,7 +259,7 @@
           <div class="col-md-6">
             <div class="row mb-5">
               <div class="col-md-6 mb-3 mb-md-0">
-                <button class="btn btn-primary btn-sm btn-block">Update Cart</button>
+                <button id="updateCart" class="btn btn-primary btn-sm btn-block">Update Cart</button>
               </div>
               <div class="col-md-6">
                 <button class="btn btn-outline-primary btn-sm btn-block">Continue Shopping</button>
