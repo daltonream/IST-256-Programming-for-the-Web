@@ -1,4 +1,5 @@
 //Create a server that can send back static files
+//You might need to insure YOU have the correct npm modules downloaded to the npm-modules folder
 const http = require("http");
 const url = require("url");
 const fs = require("fs");
@@ -8,17 +9,11 @@ const lookup = require("mime-types").lookup;
 
 const server = http.createServer((req, res) => {
     //handle the request and send back a static file
-    //from a folder called `public`
+    //from a folder called `shopper_management`
     let parsedURL = url.parse(req.url, true);
     //remove the leading and trailing slashes
     let path = parsedURL.path.replace(/^\/+|\/+$/g, "");
-    /**
-     *  /
-     *  /index.html
-     *
-     *  /main.css
-     *  /main.js
-     */
+ 
     if (path == "") {
         path = "index.html";
     }
@@ -37,6 +32,7 @@ const server = http.createServer((req, res) => {
             res.setHeader("X-Content-Type-Options", "nosniff");
             let mime = lookup(path);
             res.writeHead(200, { "Content-type": mime });
+            // The above statement replaces the below switch statement and loads all our files properly on to localhost:1234/
             // switch (path) {
             //   case "main.css":
             //     res.writeHead(200, { "Content-type": "text/css" });
