@@ -4,8 +4,34 @@ const http = require("http");
 const url = require("url");
 const fs = require("fs");
 
+var mongodb = require('mongodb');  
+  
+var mongoClient = mongodb.MongoClient;  
+var u_rl = "mongodb://localhost:27017/";  
+  
+mongoClient.connect(u_rl, function(err, databases) {  
+      if (err)   
+      {  
+        throw err;  
+      }  
+      var nodetestDB = databases.db("eFinanceDb"); //here  
+      var customersCollection = nodetestDB.collection("pract");    
+      var customer = {_id:111, name:"Santosh Kumar" , address: "B-222, Sector-19, NOIDA", orderdata:"Arrow Shirt"};  
+        
+      customersCollection.insertOne(customer, function(error, response) {  
+          if (error) {  
+              throw error;  
+          }  
+        
+          console.log("1 document inserted");  
+          databases.close();  
+      });  
+});   
+
+
 //npm i mime-types
 const lookup = require("mime-types").lookup;
+const { Db } = require("mongoose/node_modules/mongodb");
 
 const server = http.createServer((req, res) => {
     //handle the request and send back a static file
